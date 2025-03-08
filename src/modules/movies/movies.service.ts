@@ -15,6 +15,22 @@ export class MoviesService {
   }
 
   readMovie(id: number): Movie {
-    return this.movies.find((movie) => movie.id === id)!;
+    // return this.movies.find((movie) => movie.id === id);
+    const movie = this.movies.find((movie) => movie.id === id);
+    if(movie){
+      return movie;
+    }    
+    throw new Error("Movie not found");
   }
+
+  // update movie
+  updateMovie(newMovie: Movie): Movie{
+    const index = this.movies.findIndex(movie => movie.id == newMovie.id);
+    if(index > -1){
+      this.movies[index] = newMovie;
+      return this.movies[index];
+    }
+    throw new Error("Movie not found");
+  }
+
 }

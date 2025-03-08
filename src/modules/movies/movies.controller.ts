@@ -1,11 +1,10 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put } from '@nestjs/common';
 import { Movie } from './interfaces/movie.interface';
 import { MoviesService } from './movies.service';
 
 @Controller('movies')
 export class MoviesController {
-
-  constructor(private movieService: MoviesService){}
+  constructor(private movieService: MoviesService) {}
 
   // add new movie, data from body
   @Post()
@@ -16,14 +15,19 @@ export class MoviesController {
 
   // get all movies from movie-array
   @Get()
-  readMovies(): Movie[]{
+  readMovies(): Movie[] {
     return this.movieService.readMovies();
   }
 
   // get single movie by id from movie-array
   @Get(':id')
-    readMovie(@Param('id') id: number):Movie{
-      return this.movieService.readMovie(id);
-    }
+  readMovie(@Param('id') id: number): Movie {
+    return this.movieService.readMovie(id);
+  }
 
+  // update movie
+  @Put()
+  updateMovie(@Body() newMovie: Movie): Movie {
+    return this.movieService.updateMovie(newMovie);
+  }
 }
