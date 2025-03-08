@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
 import { Movie } from './interfaces/movie.interface';
 import { MoviesService } from './movies.service';
 
@@ -30,4 +30,11 @@ export class MoviesController {
   updateMovie(@Body() newMovie: Movie): Movie {
     return this.movieService.updateMovie(newMovie);
   }
+
+  // delete movie
+  @Delete(':id')
+  deleteMovie(@Param('id') id: number){
+    return this.movieService.deleteMovie(id);
+  }
+
 }

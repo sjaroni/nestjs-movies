@@ -33,4 +33,9 @@ export class MoviesService {
     throw new Error("Movie not found");
   }
 
+  // delete movie
+  deleteMovie(id: number){
+    this.movies = this.movies.filter(movie => movie.id !== id);
+  }
+
 }
