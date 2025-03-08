@@ -10,8 +10,11 @@ export class MoviesService {
     return movie.id;
   }
 
-  readMovies(): Movie[]{
+  readMovies(): Movie[] {
     return this.movies;
   }
 
+  readMovie(id: number): Movie {
+    return this.movies.find((movie) => movie.id === id)!;
+  }
 }
