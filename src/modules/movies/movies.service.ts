@@ -1,48 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { Movie } from './entities/movie.entity';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 @Injectable()
 export class MoviesService {
-  
-  // constructor(
-  //   @InjectRepository(Movie)
-  //   private usersRepository: Repository<Movie>,
-  // ) {}
+  constructor(
+    @InjectRepository(Movie)
+    private movieRepo: Repository<Movie>,
+  ) {}
 
-  private movies: Movie[] = [];
-
-  createMovie(movie: Movie): number {
-    this.movies.push(movie);
-    return movie.id;
+  createMovie(movie: Movie): Promise<Movie> {
+    return this.movieRepo.save(movie);
   }
 
-  readMovies(): Movie[] {
-    return this.movies;
+  // get all movies
+  readMovies(): Promise<Movie[]> {
+    return this.movieRepo.find();
   }
 
-  readMovie(id: number): Movie {
-    // return this.movies.find((movie) => movie.id === id);
-    const movie = this.movies.find((movie) => movie.id === id);
-    if(movie){
-      return movie;
-    }    
-    throw new Error("Movie not found");
+  // get only one movie by id  
+  readMovie(id: number): Promise<Movie | null> {
+    return this.movieRepo.findOneBy({ id });
   }
 
   // update movie
-  updateMovie(newMovie: Movie): Movie{
-    const index = this.movies.findIndex(movie => movie.id == newMovie.id);
-    if(index > -1){
-      this.movies[index] = newMovie;
-      return this.movies[index];
-    }
-    throw new Error("Movie not found");
+  updateMovie(id: number, newMovie: Movie): Promise<UpdateResult> {
+    return this.movieRepo.update(id, newMovie);
   }
 
   // delete movie
-  deleteMovie(id: number){
-    this.movies = this.movies.filter(movie => movie.id !== id);
+  deleteMovie(id: number): Promise<DeleteResult> {
+    return this.movieRepo.delete(id);
   }
-
 }
