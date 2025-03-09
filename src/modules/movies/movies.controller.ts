@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
-import { Movie } from './interfaces/movie.interface';
+import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
 @Controller('movies')

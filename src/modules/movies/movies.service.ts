@@ -1,8 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Movie } from './interfaces/movie.interface';
-
+import { Movie } from './entities/movie.entity';
+// import { InjectRepository } from '@nestjs/typeorm';
+// import { Repository } from 'typeorm';
 @Injectable()
 export class MoviesService {
+  
+  // constructor(
+  //   @InjectRepository(Movie)
+  //   private usersRepository: Repository<Movie>,
+  // ) {}
+
   private movies: Movie[] = [];
 
   createMovie(movie: Movie): number {
