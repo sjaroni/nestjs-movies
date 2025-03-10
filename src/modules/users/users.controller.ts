@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService) {}
 
   // add new user, data from body
   @Post()
@@ -17,5 +17,21 @@ constructor(private userService: UsersService) {}
   @Get()
   readUsers(): Promise<User[]> {
     return this.userService.readUsers();
-  }  
+  }
+
+  // save movie to users watchlist
+  @Put(':userId/movies/:movieId')  
+  addMovieToWatchList(
+    @Param('userId') userId: number,
+    @Param('movieId') movieId: number,
+  ) {
+    return this.userService.addMovieToWatchList(userId, movieId);
+  }
+
+  // get all movies from user-watchlist
+  @Get(':userId/movies')
+  getWatchList(@Param('userId') userId: number){
+    return this.userService.getWatchList(userId);
+  }
+
 }
