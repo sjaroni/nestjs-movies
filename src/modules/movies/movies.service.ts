@@ -18,7 +18,7 @@ export class MoviesService {
     return this.movieRepo.find();
   }
 
-  // get only one movie by id  
+  // get only one movie by id
   readMovie(id: number): Promise<Movie | null> {
     return this.movieRepo.findOneBy({ id });
   }
