@@ -1,5 +1,5 @@
 import { ArgumentMetadata, HttpException, Injectable, PipeTransform } from '@nestjs/common';
-import { Movie } from 'src/modules/movies/entities/movie.entity';
+import { Movie } from 'src/modules/movies/movie';
 
 @Injectable()
 export class MovieValidationPipe implements PipeTransform {
