@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Movie } from './entities/movie.entity';
+import { Movie } from './movie';
 import { MoviesService } from './movies.service';
 import { MoviesController } from './movies.controller';
 

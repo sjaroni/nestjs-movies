@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './modules/movies/entities/movie.entity';
 import { UsersModule } from './modules/users/users.module';
 import { User } from './modules/users/entities/user.entity';
+import { CommentsModule } from './modules/comments/comments.module';
 
 @Module({
   imports: [MoviesModule, TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { User } from './modules/users/entities/user.entity';
     database: 'nestdb',
     entities: [Movie, User],
     synchronize: true,
-  }), UsersModule,],
+  }), UsersModule, CommentsModule,],
   controllers: [AppController],
   providers: [AppService, MoviesService],
 })

@@ -1,4 +1,4 @@
-import { Movie } from 'src/modules/movies/entities/movie.entity';
+import { Movie } from 'src/modules/movies/movie';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity()

@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Genre } from "../enums/movie.enum";
+import { Genre } from "./enums/movie.enum";
 import { IsEnum, IsNumber, IsString, Max, MaxLength, Min, MinLength } from "class-validator";
 
 @Entity()

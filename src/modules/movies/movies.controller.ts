@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Param, Put, Delete, ParseIntPipe, ValidationPipe } from '@nestjs/common';
-import { Movie } from './entities/movie.entity';
+import { Movie } from './movie';
 import { MoviesService } from './movies.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
 // import { MovieValidationPipe } from 'src/common/pipes/movie-validation/movie-validation.pipe';
