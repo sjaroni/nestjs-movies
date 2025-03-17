@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Post, Param, Put, Delete, ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Param,
+  Put,
+  Delete,
+  ParseIntPipe,
+  ValidationPipe,
+  Patch,
+} from '@nestjs/common';
 import { Movie } from './movie';
 import { MoviesService } from './movies.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
@@ -25,20 +36,32 @@ export class MoviesController {
 
   // get single movie by id from movie-array
   @Get(':id')
-  readMovie(@Param('id', ParseIntPipe) id: number,): Promise<Movie | null> {
+  readMovie(@Param('id', ParseIntPipe) id: number): Promise<Movie | null> {
     return this.movieService.readMovie(id);
   }
 
-  // update movie
+  // update full movie
   @Put(':id')
-  updateMovie(@Param('id') id: number, @Body() newMovie: Movie): Promise<UpdateResult> {
-    return this.movieService.updateMovie(id, newMovie);
+  updateFullMovie(
+    @Param('id') id: number,
+    @Body() newMovie: Movie,
+  ): Promise<UpdateResult> {
+    return this.movieService.updateFullMovie(id, newMovie);
+  }
+
+  // update part of movie
+  // works only if validation in movie.ts is off
+  @Patch(':id')
+  updatePartiallyMovie(
+    @Param('id') id: string,
+    @Body() updateUserDto: Movie,
+  ) {
+    return this.movieService.updatePartiallyMovie(+id, updateUserDto);
   }
 
   // delete movie
   @Delete(':id')
-  deleteMovie(@Param('id') id: number): Promise<DeleteResult>{
+  deleteMovie(@Param('id') id: number): Promise<DeleteResult> {
     return this.movieService.deleteMovie(id);
   }
-
 }

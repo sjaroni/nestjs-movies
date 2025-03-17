@@ -23,10 +23,17 @@ export class MoviesService {
     return this.movieRepo.findOneBy({ id });
   }
 
-  // update movie
-  updateMovie(id: number, newMovie: Movie): Promise<UpdateResult> {
+  // update full movie
+  updateFullMovie(id: number, newMovie: Movie): Promise<UpdateResult> {
     return this.movieRepo.update(id, newMovie);
   }
+
+  // update part of movie
+  // works only if validation in movie.ts is off
+  async updatePartiallyMovie(id: number, updateMovieDto: Partial<Movie>): Promise<UpdateResult> {
+    return this.movieRepo.update(id, updateMovieDto);
+  }
+  
 
   // delete movie
   deleteMovie(id: number): Promise<DeleteResult> {
